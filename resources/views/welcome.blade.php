@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                <a href="https://mailtrap.io/inboxes/3174011/messages/4485787989">Laravel</a>    
                 </div>
 
                 <div class="links">

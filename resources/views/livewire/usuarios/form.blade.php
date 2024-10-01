@@ -14,10 +14,10 @@
                 <input type="text" wire:model.lazy="telefono" class="form-control" placeholder="teléfono" maxlength="10">
             </div>
 
-            <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <!-- <div class="form-group col-lg-4 col-md-4 col-sm-12">
                 <label>Móvil</label>
                 <input type="text" wire:model.lazy="movil" class="form-control" placeholder="móvil" maxlength="10">
-            </div>
+            </div> -->
 
             <div class="form-group col-lg-4 col-md-4 col-sm-12">
                 <label>Email</label>
@@ -37,10 +37,10 @@
                 <label>Password</label>
                 <input type="password" wire:model.lazy="password" class="form-control" placeholder="contraseña">
             </div>
-            <div class="form-group col-lg-4 col-md-4 col-sm-12">
+            <!-- <div class="form-group col-lg-4 col-md-4 col-sm-12">
                 <label>Dirección</label>
                 <input type="text" wire:model.lazy="direccion" class="form-control" placeholder="dirección...">
-            </div>
+            </div> -->
 
         </div>
 

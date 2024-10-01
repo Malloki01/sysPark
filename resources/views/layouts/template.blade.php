@@ -341,11 +341,11 @@
 
                             <ul class="collapse submenu list-unstyled" id="configurations" data-parent="#topAccordion">
                                 <li>
-                                    <a href="#">EMPRESA </a>
+                                    <a href="https://www.revistamototec.com/colombia-ofrecen-hasta-dos-horas-gratis-de-estacionamiento-para-motos-electricas-con-el-fin-de-incentivar-su-uso/">EMPRESA </a>
                                 </li>
 
                                 <li>
-                                    <a href="#"> CAJONES </a>
+                                    <a href="https://www.quitoinforma.gob.ec/2021/11/24/zona-azul-activa-plazas-de-parqueo-para-motocicletas/"> INFORMACIÓN </a>
                                 </li>
 
                                 <li>
