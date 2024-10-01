@@ -20,10 +20,10 @@
                         <tr>
                             <th class="">NOMBRE</th>
                             <th class="">TELEFONO</th>
-                            <th class="">MOVIL</th>
+                            <!-- <th class="">MOVIL</th> -->
                             <th class="">EMAIL</th>
                             <th class="">TIPO</th>
-                            <th class="">DIRECCIÓN</th>
+                            <!-- <th class="">DIRECCIÓN</th> -->
                             <th class="text-center">ACCIONES</th>
                         </tr>
                     </thead>
@@ -34,10 +34,10 @@
                                 <p class="mb-0">{{$r->nombre}}</p>
                             </td>
                             <td>{{$r->telefono}}</td>
-                            <td>{{$r->movil}}</td>
+                            <!-- <td>{{$r->movil}}</td> -->
                             <td>{{$r->email}}</td>
                             <td>{{$r->tipo}}</td>
-                            <td>{{$r->direccion}}</td>
+                            <!-- <td>{{$r->direccion}}</td> -->
                             <td class="text-center">
                                 <!-- @include('common.actions')  -->
                                 <!-- botones editar y eliminar -->

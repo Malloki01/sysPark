@@ -349,7 +349,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="#"> TIPOS DE VEHICULOS </a>
+                                    <a href="{{url('tipos')}}"> TIPOS DE VEHICULOS </a>
                                 </li>
                             </ul>
                         </li>
