@@ -59,3 +59,16 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Crear Componentes en Livewire
+
+php artisan make:livewire Tipos
+
+## Crear migraciones(Editar tipos)
+
+php artisan make:migration create_tipos_table --create=tipos
+
+## Crear modelos(Editar Tipo)
+
+php artisan make:model Tipo
+
