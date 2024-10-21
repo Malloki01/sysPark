@@ -24,3 +24,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::view('tipos','tipos');
 Route::view('usuarios','usuarios');
+Route::view('incidencias','incidencias');
