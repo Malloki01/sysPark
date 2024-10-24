@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Livewire\RegistrosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::view('tipos','tipos');
 Route::view('usuarios','usuarios');
 Route::view('incidencias','incidencias');
+
+Route::view('entrada', 'livewire.registros.entrada')->name('entrada');
+Route::view('salida', 'livewire.registros.salida')->name('salida');

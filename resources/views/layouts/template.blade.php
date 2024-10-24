@@ -435,11 +435,11 @@
 
                         <ul class="collapse submenu list-unstyled" id="quotation" data-parent="#topAccordion">
                             <li>
-                                <a href="{{url('incidencias')}}"> ENTRADA </a>
+                                <a href="{{ route('entrada') }}"> ENTRADA </a>
                             </li>
 
                             <li>
-                                <a href="#"> SALIDA </a>
+                                <a href="{{ route('salida') }}"> SALIDA </a>
                             </li>
 
                         </ul>

@@ -72,3 +72,23 @@ php artisan make:migration create_tipos_table --create=tipos
 
 php artisan make:model Tipo
 
+
+php artisan cache:clear
+php artisan config:clear  
+php artisan view:clear
+
+
+  <!-- Mostrar detalles del propietario si se encuentra -->
+                        @if($usuario)
+                        <div class="mt-3">
+                            <p><strong>Propietario:</strong> {{ $usuario->nombres }} {{ $usuario->apellidos }}</p>
+                            <p><strong>Nro de Placa:</strong> {{ $usuario->nro_placa }}</p>
+                        </div>
+                        @endif
+
+                        <!-- Botón para registrar la entrada -->
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary" @if(!$usuario) disabled @endif>Guardar Entrada</button>
+                        </div>
+
+git config --global core.autocrlf true
