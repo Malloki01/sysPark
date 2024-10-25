@@ -17,7 +17,7 @@ class CreateRegistrosTable extends Migration
             // Variables : dni, placa_vehiculo, tipo, hora_entrada, hora_salida, fecha
             $table->id();//Id_Registro
             $table->string('dni', 8); // DNI
-            $table->string('placa_vehiculo', 6); // Placa Vehiculo
+            $table->string('placa_vehiculo')->nullable(); // Placa Vehiculo
             $table->string('tipo'); // Tipo
             $table->timestamp('hora_entrada'); // Hora Entrada
             $table->timestamp('hora_salida')->nullable(); // Hora Salida

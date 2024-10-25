@@ -1,33 +1,37 @@
-@extends('layouts.template')
-
-@section('content')
-
-
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header text-center">
-                    <h3>Registro de Entrada</h3>
+                    <h3>Registro de Salida</h3>
                 </div>
                 <div class="card-body">
-                    
-                   
-                    <form wire:submit.prevent="guardarEntrada">
+                        <!-- Mostrar mensajes de éxito o error -->
+                        @if (session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                        @endif
+
+                        @if (session()->has('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                        @endif
                         <!-- Campo para el DNI o Placa -->
                         <div class="form-group">
                             <label for="dni_placa">DNI o Placa</label>
                             <input type="text" id="dni_placa" class="form-control" placeholder="Ingrese DNI o Placa" wire:model="dni_placa"
-                            onkeypress="return validarAlfanumerico(event)">
+                                onkeypress="return validarAlfanumerico(event)">
                         </div>
 
                         <!-- Botón para validar el usuario -->
                         <div class="text-center mt-3">
-                            <button type="button" wire:click="validarUsuario" class="btn btn-secondary">Validar</button>
+                            <button type="button" wire:click="validarUsuarioSalida" class="btn btn-secondary">Validar</button>
                         </div>
 
-                      <!-- Mostrar detalles del propietario si se encuentra -->
-                      @if(isset($usuario) && $usuario)
+                        <!-- Mostrar detalles del propietario si se encuentra -->
+                        @if(isset($usuario) && $usuario)
                         <div class="mt-3">
                             <p><strong>Propietario:</strong> {{ $usuario->nombres }} {{ $usuario->apellidos }}</p>
                             @if($usuario->nro_placa)
@@ -38,20 +42,16 @@
 
                         <!-- Botón para registrar la entrada -->
                         <div class="text-center mt-4">
-                            <button type="button" class="btn btn-primary" wire:click="confirmSave">Guardar</button>
+                            <button type="button" class="btn btn-primary" onclick="confirmSave()">Guardar</button>
                         </div>
-
-                    </form>
                 </div>
             </div>
         </div>
     </div>
-    
-</div>
-@endsection
 
+</div>
 <script type="text/javascript">
-   function confirmSave() {
+    function confirmSave() {
         let me = this
         swal({
                 title: 'CONFIRMAR',
@@ -65,23 +65,23 @@
                 closeOnConfirm: false
             },
             function() {
-                
-                window.livewire.emit('guardarEntrada') // Emitimos el evento para Livewire
-                toastr.success('info', 'Vehiculo registrado con éxito')
+
+                window.livewire.emit('guardarSalida') // Emitimos el evento para Livewire
+                toastr.success('info', ' Salida del Vehiculo registrado con éxito')
                 swal.close() // Cerramos la alerta modal
             })
     }
 
 
-   // Función para validar solo letras y números
-   function validarAlfanumerico(e) {
-       let key = e.key;
-       let regex = /^[a-zA-Z0-9]+$/;  // Expresión regular para permitir solo letras y números
-       
-       if (!regex.test(key)) {
-           e.preventDefault(); // Evita que el carácter no permitido se ingrese
-           return false;
-       }
-       return true;
-   }
+    // Función para validar solo letras y números
+    function validarAlfanumerico(e) {
+        let key = e.key;
+        let regex = /^[a-zA-Z0-9-]+$/; // Expresión regular para permitir solo letras y números
+
+        if (!regex.test(key)) {
+            e.preventDefault(); // Evita que el carácter no permitido se ingrese
+            return false;
+        }
+        return true;
+    }
 </script>

@@ -283,7 +283,7 @@
                                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                                 </svg>
 
-                                <span>DASH</span>
+                                <span>DISPONIBILIDAD</span>
                             </div>
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -435,11 +435,11 @@
 
                         <ul class="collapse submenu list-unstyled" id="quotation" data-parent="#topAccordion">
                             <li>
-                                <a href="{{ route('entrada') }}"> ENTRADA </a>
+                                <a href="{{ url('entradas') }}"> ENTRADA </a>
                             </li>
 
                             <li>
-                                <a href="{{ route('salida') }}"> SALIDA </a>
+                                <a href="{{ url('salidas') }}"> SALIDA </a>
                             </li>
 
                         </ul>

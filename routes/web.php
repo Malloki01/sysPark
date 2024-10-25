@@ -27,5 +27,6 @@ Route::view('tipos','tipos');
 Route::view('usuarios','usuarios');
 Route::view('incidencias','incidencias');
 
-Route::view('entrada', 'livewire.registros.entrada')->name('entrada');
-Route::view('salida', 'livewire.registros.salida')->name('salida');
+// Rutas para el controlador de registros
+Route::view('entradas', 'entradas');
+Route::view('salidas', 'salidas');
