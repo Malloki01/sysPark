@@ -37,6 +37,6 @@ class DisponibilidadController extends Component
 
     public function render()
     {
-        return view('livewire.disponibilidad');
+        return view('livewire.disponibilidad.component');
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use App\Registro;
 use App\Cliente;
+use Illuminate\Http\Request;
 
 class RegistrosController extends Component
 {
@@ -56,17 +57,19 @@ class RegistrosController extends Component
             'dni_placa' => 'required',
         ]);
         // Buscar el usuario por DNI o número de placa
-        $this->usuario = Cliente::where('dni', $this->dni_placa)
-            ->orWhere('nro_placa', $this->dni_placa)
+        $this->usuario = Registro::where('dni', $this->dni_placa)
+            ->orWhere('placa_vehiculo', $this->dni_placa)->latest()
             ->first();
 
         if (!$this->usuario) {
             session()->flash('error', 'Usuario no encontrado');
         } else {
             // Buscar el registro de entrada del usuario
-            $this->registro = Registro::where('dni', $this->usuario->dni)
-                ->whereNull('hora_salida')
-                ->latest()
+            $this->registro = Registro::where('registros.dni', $this->usuario->dni)
+                ->orWhere('registros.placa_vehiculo', $this->usuario->placa_vehiculo)
+                ->join('clientes as cli', 'registros.dni', '=', 'cli.dni')
+                ->select('registros.*','cli.nombres', 'cli.apellidos', 'cli.nro_placa')
+                ->latest('hora_salida')
                 ->first();
 
             if (!$this->registro) {
@@ -103,8 +106,15 @@ class RegistrosController extends Component
     public function guardarSalida()
     {
         if ($this->registro) {
-            $this->registro->hora_salida = now();
-            $this->registro->save();
+            //Realizar una consulta nueva en registro guardar el ultimo  id de registro de entrada y lo actualiza
+            $registro = Registro::where('dni', $this->registro->dni)
+                ->whereNull('hora_salida')
+                ->update([
+                    'hora_salida' => now(),
+                ]);
+
+            // Guardar la salida si el registro de entrada fue encontrado
+
 
             session()->flash('message', 'Salida registrada exitosamente');
             $this->resetInput();

@@ -1,16 +1,16 @@
 <div class="card">
-    <div class="card-header text-center">
-        <h4>Disponibilidad</h4>
+    <div class="card-header text-center" style="background-color: #f8f9fa;">
+        <h4 style="font-weight: bold; color: #4a4a4a;">Disponibilidad</h4>
     </div>
     <div class="card-body">
         <p>Automovil: {{ $disponibilidad['automovil'] }} libres</p>
         <p>Moto: {{ $disponibilidad['moto'] }} libres</p>
         <p>Scooter eléctrico: {{ $disponibilidad['scooter'] }} libres</p>
-        <p>Bicicleta: 
+        <p>Bicicleta:
             @if ($disponibilidad['bicicleta'] == 0)
-                lleno
+            lleno
             @else
-                {{ $disponibilidad['bicicleta'] }} libres
+            {{ $disponibilidad['bicicleta'] }} libres
             @endif
         </p>
     </div>

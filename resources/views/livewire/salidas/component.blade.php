@@ -31,11 +31,11 @@
                         </div>
 
                         <!-- Mostrar detalles del propietario si se encuentra -->
-                        @if(isset($usuario) && $usuario)
+                        @if(isset($registro) && $registro)
                         <div class="mt-3">
-                            <p><strong>Propietario:</strong> {{ $usuario->nombres }} {{ $usuario->apellidos }}</p>
-                            @if($usuario->nro_placa)
-                            <p><strong>Nro de Placa:</strong> {{ $usuario->nro_placa }}</p>
+                            <p><strong>Propietario:</strong> {{ $registro->nombres }} {{ $registro->apellidos }}</p>
+                            @if($registro->nro_placa)
+                            <p><strong>Nro de Placa:</strong> {{ $registro->nro_placa }}</p>
                             @endif
                         </div>
                         @endif

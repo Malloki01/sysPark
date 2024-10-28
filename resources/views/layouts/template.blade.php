@@ -295,7 +295,7 @@
 
                         <ul class="collapse submenu list-unstyled" id="dashboard" data-parent="#topAccordion">
                             <li>
-                                <a href="#"> ESTADÍSTICOS </a>
+                                <a href="{{url('home')}}"> ESTADÍSTICOS </a>
                             </li>
                         </ul>
                     </li>
