@@ -3,7 +3,7 @@
         <h4 style="font-weight: bold; color: #4a4a4a;">Disponibilidad</h4>
     </div>
     <div class="card-body">
-        <p>Automovil: {{ $disponibilidad['automovil'] }} libres</p>
+        <p>Carro: {{ $disponibilidad['carro'] }} libres</p>
         <p>Moto: {{ $disponibilidad['moto'] }} libres</p>
         <p>Scooter eléctrico: {{ $disponibilidad['scooter'] }} libres</p>
         <p>Bicicleta:
