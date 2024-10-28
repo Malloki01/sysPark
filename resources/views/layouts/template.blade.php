@@ -468,7 +468,7 @@
 
                         <ul class="collapse submenu list-unstyled" id="reports" data-parent="#topAccordion">
                             <li>
-                                <a href="#"> VENTAS DEL DIA </a>
+                                <a href="{{ url('graficos') }}"> POR HORAS</a>
                             </li>
 
                             <li>

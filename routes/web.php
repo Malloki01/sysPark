@@ -30,3 +30,5 @@ Route::view('incidencias','incidencias');
 // Rutas para el controlador de registros
 Route::view('entradas', 'entradas');
 Route::view('salidas', 'salidas');
+Route::view('graficos', 'graficos');
+
