@@ -27,7 +27,7 @@
 
                         <!-- Botón para validar el usuario -->
                         <div class="text-center mt-3">
-                            <button type="button" wire:click="validarUsuarioSalida" class="btn btn-secondary">Validar</button>
+                            <button type="button" wire:click="validarUsuarioSalida" class="btn btn-secondary">Consultar</button>
                         </div>
 
                         <!-- Mostrar detalles del propietario si se encuentra -->

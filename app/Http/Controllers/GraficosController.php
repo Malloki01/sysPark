@@ -9,30 +9,36 @@ use Carbon\Carbon;
 
 class GraficosController extends Controller
 {
-
-    public function obtenerDatos()
+    public function obtenerDatos(Request $request)
     {
         try {
-            // Obtener los datos de la tabla 'registro'
+            // Obtener el parámetro de fecha desde la solicitud
+            $fecha = $request->input('fecha');
+
+            // Convertir la fecha a un objeto Carbon
+            $fecha = Carbon::parse($fecha);
+
+            // Obtener los datos de la tabla 'registro' para la fecha seleccionada
             $registros = Registro::selectRaw('HOUR(hora_entrada) as hora, tipo, COUNT(*) as cantidad')
-                // ->whereDate('fecha', Carbon::today()) // Filtrar por la fecha de hoy
+                ->whereDate('fecha', $fecha)
                 ->groupBy('hora', 'tipo')
                 ->get();
 
             // Verifica que se están obteniendo los datos correctamente
             if ($registros->isEmpty()) {
-                Log::info("No se encontraron registros en la tabla.");
+                Log::info("No se encontraron registros en la tabla para la fecha: " . $fecha->toDateString());
             } else {
-                Log::info("Registros obtenidos: ", $registros->toArray());
+                Log::info("Registros obtenidos para la fecha " . $fecha->toDateString() . ": ", $registros->toArray());
             }
 
             // Formatear los datos para Google Charts
-            $data = [['Hora', 'Carros', 'Bicicletas']];
+            $data = [['Hora', 'Carros', 'Bicicletas', 'Scooter Electrico', 'Motos']];
             $horas = range(0, 23);
-            $tipos = ['carro', 'bicicleta'];
+            $tipos = ['carro', 'bicicleta', 'scooter electrico', 'moto'];
 
             foreach ($horas as $hora) {
-                $fila = [sprintf('%02d:00', $hora), 0, 0];
+                // Inicializar cada fila con ceros para cada tipo de vehículo
+                $fila = [sprintf('%02d:00', $hora), 0, 0, 0, 0];
                 foreach ($tipos as $index => $tipo) {
                     // Filtrar registros solo para la hora actual y tipo actual
                     $registrosHora = $registros->where('hora', $hora);

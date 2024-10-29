@@ -9,7 +9,7 @@ class DisponibilidadController extends Component
     public $capacidad = [
         'carro' => 10,
         'moto' => 10,
-        'scooter' => 0,
+        'scooter' => 10,
         'bicicleta' => 10, // Capacidad limitada
     ];
     

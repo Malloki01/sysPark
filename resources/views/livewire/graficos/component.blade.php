@@ -7,6 +7,12 @@
                     Filtrar Ingresos
                 </h2>
 
+                <!-- Control de filtrado por fecha -->
+                <div class="mb-3">
+                    <label for="dateInput" class="form-label">Fecha:</label>
+                    <input type="date" id="dateInput" class="form-control" onchange="fetchData()">
+                </div>
+
                 <!-- Control de filtrado por hora de entrada -->
                 <div class="mb-3">
                     <label for="hourStartInput" class="form-label">Hora de entrada:</label>
@@ -23,10 +29,11 @@
                 <div class="mb-3">
                     <label for="vehicleTypeSelect" class="form-label">Tipo de vehículo:</label>
                     <select id="vehicleTypeSelect" class="form-select" onchange="filterData()">
-                        <!-- Opciones ajustadas para coincidir con los datos de la base de datos -->
                         <option value="all">Todos</option>
-                        <option value="carro">Carro</option>
-                        <option value="bicicleta">Bicicleta</option>
+                        <option value="carro">carro</option>
+                        <option value="bicicleta">bicicleta</option>
+                        <option value="scooter electrico">scooter electrico</option>
+                        <option value="moto">moto</option>
                     </select>
                 </div>
             </div>
@@ -57,7 +64,13 @@
 
     // Función para obtener datos reales desde el backend
     function fetchData() {
-        fetch('/obtener-datos')
+        // Obtener el valor de la fecha
+        const date = document.getElementById('dateInput').value;
+
+        // Construir la URL con el parámetro de fecha
+        const url =`/obtener-datos?fecha=${date}`;
+
+        fetch(url)
             .then(response => response.json())
             .then(data => {
                 console.log("Datos obtenidos del servidor:", data); // Agrega esta línea para ver los datos en la consola
@@ -65,51 +78,41 @@
                 drawVisualization();
             })
             .catch(error => console.error('Error al obtener los datos:', error));
-            
     }
-
 
     // Función para dibujar el gráfico
     function drawVisualization(filteredData = null) {
-    try {
-        // Verificar si hay datos válidos en el array (al menos una fila de encabezado y una fila de datos)
-        const dataToDraw = filteredData || originalData;
-        if (dataToDraw.length <= 1 || dataToDraw.every(row => row.slice(1).every(value => isNaN(value)))) {
-            // Mostrar mensaje en caso de datos vacíos o no numéricos
-            document.getElementById('chart_div').innerHTML = "<p style='color: red; text-align: center;'>No se encuentra información para mostrar en el gráfico.</p>";
-            return; // Salir de la función sin intentar dibujar
-        }
+        try {
+            const dataToDraw = filteredData || originalData;
+            if (dataToDraw.length <= 1 || dataToDraw.every(row => row.slice(1).every(value => isNaN(value)))) {
+                document.getElementById('chart_div').innerHTML = "<p style='color: red; text-align: center;'>No se encuentra información para mostrar en el gráfico.</p>";
+                return;
+            }
 
-        // Convertir los datos en un formato compatible con Google Charts
-        const data = google.visualization.arrayToDataTable(dataToDraw);
+            const data = google.visualization.arrayToDataTable(dataToDraw);
 
-        // Opciones de configuración del gráfico
-        const options = {
-            title: 'Número de Vehículos por Hora',
-            vAxis: {
-                title: 'Cantidad de Vehículos',
-                viewWindow: {
-                    min: 0,
-                    max: 10
+            const options = {
+                title: 'Número de Vehículos por Hora',
+                vAxis: {
+                    title: 'Cantidad de Vehículos',
+                    viewWindow: { min: 0, max: 10 },
+                    ticks: [0, 2, 4, 6, 8, 10],
+                    baselineColor: '#FF0000',
+                    baseline: 7
                 },
-                ticks: [0, 2, 4, 6, 8, 10],
-                baselineColor: '#FF0000',
-                baseline: 7
-            },
-            hAxis: { title: 'Hora' },
-            colors: ['#4285F4', '#DB4437', 'Yellow', 'Green'],
-            legend: { position: 'bottom' },
-            lineWidth: 3
-        };
+                hAxis: { title: 'Hora' },
+                colors: ['#4285F4', '#DB4437', 'Yellow', 'Green'],
+                legend: { position: 'bottom' },
+                lineWidth: 3
+            };
 
-        // Crear el gráfico y dibujarlo en el contenedor chart_div
-        const chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-    } catch (error) {
-        console.error('Error al dibujar el gráfico:', error);
-        document.getElementById('chart_div').innerHTML = "<p style='color: red; text-align: center;'>No se encuentra información para mostrar en el gráfico.</p>";
+            const chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        } catch (error) {
+            console.error('Error al dibujar el gráfico:', error);
+            document.getElementById('chart_div').innerHTML = "<p style='color: red; text-align: center;'>No se encuentra información para mostrar en el gráfico.</p>";
+        }
     }
-}
 
 
 
@@ -136,7 +139,9 @@
             // Índice del tipo de vehículo en los datos (1 para carro y 2 para bicicleta)
             const vehicleTypeIndex = {
                 'carro': 1,
-                'bicicleta': 2
+                'bicicleta': 2,
+                'scooter electrico': 3,
+                'moto': 4
             } [vehicleType];
 
             // Crear un nuevo conjunto de datos solo con el tipo de vehículo seleccionado

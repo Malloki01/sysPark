@@ -50,6 +50,16 @@
                     </div>
                 </div>
 
+                 <!-- Campo para subir imagen -->
+                 <!-- <div class="col-sm-12 col-lg-8 col-md-8 mb-4">
+                        <label>Subir Imagen</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" wire:model="image" accept="image/*">
+                        </div>
+                        @error('image') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+                </div> -->
+
                 <div class="column">
                     <div class="col-lg-5 mt-2 d-flex justify-content-start">
                         <button type="button" wire:click="doAction(1)" class="btn btn-outline-danger btn-rounded mr-1">
