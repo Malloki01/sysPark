@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use App\Registro;
 use App\Cliente;
-use Illuminate\Http\Request;
 
 class RegistrosController extends Component
 {
@@ -105,6 +104,7 @@ class RegistrosController extends Component
     // Guardar el registro de salida
     public function guardarSalida()
     {
+
         if ($this->registro) {
             //Realizar una consulta nueva en registro guardar el ultimo  id de registro de entrada y lo actualiza
             $registro = Registro::where('dni', $this->registro->dni)
@@ -112,6 +112,7 @@ class RegistrosController extends Component
                 ->update([
                     'hora_salida' => now(),
                 ]);
+        
 
             // Guardar la salida si el registro de entrada fue encontrado
 

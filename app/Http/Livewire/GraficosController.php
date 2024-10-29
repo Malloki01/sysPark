@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Registro; // Ensure this model exists in the specified namespace
+use Illuminate\Support\Facades\Log;
 
 class GraficosController extends Component
 {
@@ -10,4 +12,6 @@ class GraficosController extends Component
     {
         return view('livewire.graficos.component');
     }
+
+    
 }

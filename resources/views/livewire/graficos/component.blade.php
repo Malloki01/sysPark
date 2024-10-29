@@ -23,10 +23,10 @@
                 <div class="mb-3">
                     <label for="vehicleTypeSelect" class="form-label">Tipo de vehículo:</label>
                     <select id="vehicleTypeSelect" class="form-select" onchange="filterData()">
+                        <!-- Opciones ajustadas para coincidir con los datos de la base de datos -->
                         <option value="all">Todos</option>
-                        <option value="car">Carro</option>
-                        <option value="truck">Camión</option>
-                        <option value="motorcycle">Moto</option>
+                        <option value="carro">Carro</option>
+                        <option value="bicicleta">Bicicleta</option>
                     </select>
                 </div>
             </div>
@@ -47,86 +47,113 @@
 <!-- Script de Google Charts -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(drawVisualization);
+    // Cargar la biblioteca de Google Charts y llamar a fetchData cuando esté lista
+    google.charts.load('current', {
+        'packages': ['corechart']
+    });
+    google.charts.setOnLoadCallback(fetchData);
 
-    // Datos iniciales de ejemplo
-    var originalData = [
-        ['Hora', 'Carros', 'Camiones', 'Motos'],
-        ['00:00', 5, 2, 1],
-        ['01:00', 3, 1, 0],
-        ['02:00', 8, 4, 2],
-        ['03:00', 12, 6, 3],
-        ['04:00', 13, 6, 3],
-        ['22:00', 15, 7, 5],
-        ['23:00', 20, 10, 7]
-    ];
+    let originalData = []; // Inicializar como un array vacío para almacenar los datos reales
 
-    function drawVisualization(filteredData = null) {
-        const data = google.visualization.arrayToDataTable(
-            filteredData || originalData
-        );
-
-        const options = {
-            title: 'Número de Vehículos por Hora',
-            vAxis: { title: 'Cantidad de Vehículos' },
-            hAxis: { title: 'Hora' },
-            seriesType: 'bars',
-            series: { 3: { type: 'line' } },
-            lineWidth: 2,
-            colors: ['#4285F4', '#DB4437', '#F4B400'],
-            trendlines: { 0: {} },
-            legend: { position: 'bottom' },
-        };
-
-        const chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
+    // Función para obtener datos reales desde el backend
+    function fetchData() {
+        fetch('/obtener-datos')
+            .then(response => response.json())
+            .then(data => {
+                console.log("Datos obtenidos del servidor:", data); // Agrega esta línea para ver los datos en la consola
+                originalData = data;
+                drawVisualization();
+            })
+            .catch(error => console.error('Error al obtener los datos:', error));
     }
+
+
+    // Función para dibujar el gráfico
+function drawVisualization(filteredData = null) {
+    // Convertir los datos en un formato compatible con Google Charts
+    const data = google.visualization.arrayToDataTable(
+        filteredData || originalData
+    );
+
+    // Opciones de configuración del gráfico
+    const options = {
+        title: 'Número de Vehículos por Hora',
+        vAxis: {
+            title: 'Cantidad de Vehículos',
+            viewWindow: {
+                min: 0,
+                max: 10
+            }, // Rango de 0 a 10 (ajústalo si necesitas otro rango)
+            ticks: [0, 2, 4, 6, 8, 10], // Intervalos de 2 en 2
+            
+            // Agrega el limite de referencia en el valor 7
+            
+
+            
+
+        },
+        hAxis: {
+            title: 'Hora'
+        },
+        seriesType: 'bars', // Tipo de gráfico principal: barras
+        series: {
+            2: {
+                type: 'line'
+            }
+        }, // Tipo de serie secundaria: línea
+        lineWidth: 2,
+        colors: ['#4285F4', '#DB4437'], // Colores para cada tipo de vehículo
+        legend: {
+            position: 'bottom'
+        },
+
+        // Ajusta el ancho de las barras
+        bar: { groupWidth: "80%" } // Aumenta el valor para hacer las barras más anchas; prueba con "80%", "90%", o un tamaño fijo como "50px"
+    };
+
+    // Crear el gráfico y dibujarlo en el contenedor chart_div
+    const chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+}
+
 
     // Función para filtrar datos por tipo de vehículo y rango de horas
     function filterData() {
+        // Obtener valores de los filtros
         const hourStart = document.getElementById('hourStartInput').value;
         const hourEnd = document.getElementById('hourEndInput').value;
         const vehicleType = document.getElementById('vehicleTypeSelect').value;
 
+        // Clonar los datos originales para aplicar filtros sin modificar originalData
         let filteredData = originalData.map(row => row.slice());
 
         // Filtrar por rango de horas
         if (hourStart !== '' && hourEnd !== '') {
             filteredData = filteredData.filter(row => {
-                const hour = row[0];
-                return (hour >= hourStart && hour <= hourEnd) || row[0] === 'Hora';
+                const hour = row[0]; // Hora en el formato "HH:00"
+                return (hour >= hourStart && hour <= hourEnd) || row[0] === 'Hora'; // Mantener la fila de encabezado
             });
         }
 
         // Filtrar por tipo de vehículo
         if (vehicleType !== 'all') {
+            // Índice del tipo de vehículo en los datos (1 para carro y 2 para bicicleta)
             const vehicleTypeIndex = {
-                'car': 1,
-                'truck': 2,
-                'motorcycle': 3
-            }[vehicleType];
-         // Crear un nuevo conjunto de datos solo con el tipo de vehículo seleccionado
-         filteredData = filteredData.map(row => {
-                if (row[0] === 'Hora') {
-                    return ['Hora', row[vehicleTypeIndex], 16];
-                }
-                return [row[0], row[vehicleTypeIndex], 16];
-            });
+                'carro': 1,
+                'bicicleta': 2
+            } [vehicleType];
 
+            // Crear un nuevo conjunto de datos solo con el tipo de vehículo seleccionado
             filteredData = filteredData.map(row => {
                 if (row[0] === 'Hora') {
-                    return ['Hora', row[vehicleTypeIndex]];
+                    // Cambiar encabezado según el tipo de vehículo seleccionado
+                    return ['Hora', vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1)];
                 }
-                return [row[0], row[vehicleTypeIndex]];
+                return [row[0], row[vehicleTypeIndex]]; // Mantener solo la hora y el tipo filtrado
             });
         }
 
-        // Agregar encabezados adecuados si solo se filtra un tipo de vehículo
-        if (vehicleType !== 'all') {
-            filteredData[0] = ['Hora', vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1)];
-        }
-
+        // Dibujar el gráfico con los datos filtrados
         drawVisualization(filteredData);
     }
 </script>

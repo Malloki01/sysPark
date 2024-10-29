@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Livewire\RegistrosController;
+use App\Http\Controllers\GraficosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +30,9 @@ Route::view('incidencias','incidencias');
 // Rutas para el controlador de registros
 Route::view('entradas', 'entradas');
 Route::view('salidas', 'salidas');
+
+// Rutas para el controlador de gráficos
 Route::view('graficos', 'graficos');
+Route::get('/obtener-datos', [GraficosController::class, 'obtenerDatos']);
+
 
