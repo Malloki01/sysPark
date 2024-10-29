@@ -49,7 +49,7 @@
 <script type="text/javascript">
     // Cargar la biblioteca de Google Charts y llamar a fetchData cuando esté lista
     google.charts.load('current', {
-        'packages': ['corechart']
+        'packages': ['corechart','line']
     });
     google.charts.setOnLoadCallback(fetchData);
 
@@ -65,56 +65,52 @@
                 drawVisualization();
             })
             .catch(error => console.error('Error al obtener los datos:', error));
+            
     }
 
 
     // Función para dibujar el gráfico
-function drawVisualization(filteredData = null) {
-    // Convertir los datos en un formato compatible con Google Charts
-    const data = google.visualization.arrayToDataTable(
-        filteredData || originalData
-    );
+    function drawVisualization(filteredData = null) {
+    try {
+        // Verificar si hay datos válidos en el array (al menos una fila de encabezado y una fila de datos)
+        const dataToDraw = filteredData || originalData;
+        if (dataToDraw.length <= 1 || dataToDraw.every(row => row.slice(1).every(value => isNaN(value)))) {
+            // Mostrar mensaje en caso de datos vacíos o no numéricos
+            document.getElementById('chart_div').innerHTML = "<p style='color: red; text-align: center;'>No se encuentra información para mostrar en el gráfico.</p>";
+            return; // Salir de la función sin intentar dibujar
+        }
 
-    // Opciones de configuración del gráfico
-    const options = {
-        title: 'Número de Vehículos por Hora',
-        vAxis: {
-            title: 'Cantidad de Vehículos',
-            viewWindow: {
-                min: 0,
-                max: 10
-            }, // Rango de 0 a 10 (ajústalo si necesitas otro rango)
-            ticks: [0, 2, 4, 6, 8, 10], // Intervalos de 2 en 2
-            
-            // Agrega el limite de referencia en el valor 7
-            
+        // Convertir los datos en un formato compatible con Google Charts
+        const data = google.visualization.arrayToDataTable(dataToDraw);
 
-            
+        // Opciones de configuración del gráfico
+        const options = {
+            title: 'Número de Vehículos por Hora',
+            vAxis: {
+                title: 'Cantidad de Vehículos',
+                viewWindow: {
+                    min: 0,
+                    max: 10
+                },
+                ticks: [0, 2, 4, 6, 8, 10],
+                baselineColor: '#FF0000',
+                baseline: 7
+            },
+            hAxis: { title: 'Hora' },
+            colors: ['#4285F4', '#DB4437', 'Yellow', 'Green'],
+            legend: { position: 'bottom' },
+            lineWidth: 3
+        };
 
-        },
-        hAxis: {
-            title: 'Hora'
-        },
-        seriesType: 'bars', // Tipo de gráfico principal: barras
-        series: {
-            2: {
-                type: 'line'
-            }
-        }, // Tipo de serie secundaria: línea
-        lineWidth: 2,
-        colors: ['#4285F4', '#DB4437'], // Colores para cada tipo de vehículo
-        legend: {
-            position: 'bottom'
-        },
-
-        // Ajusta el ancho de las barras
-        bar: { groupWidth: "80%" } // Aumenta el valor para hacer las barras más anchas; prueba con "80%", "90%", o un tamaño fijo como "50px"
-    };
-
-    // Crear el gráfico y dibujarlo en el contenedor chart_div
-    const chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
+        // Crear el gráfico y dibujarlo en el contenedor chart_div
+        const chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    } catch (error) {
+        console.error('Error al dibujar el gráfico:', error);
+        document.getElementById('chart_div').innerHTML = "<p style='color: red; text-align: center;'>No se encuentra información para mostrar en el gráfico.</p>";
+    }
 }
+
 
 
     // Función para filtrar datos por tipo de vehículo y rango de horas
