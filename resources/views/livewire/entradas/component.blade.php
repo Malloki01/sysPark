@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header text-center">
-                    <h3>Registro de Entrada</h3>
+                    <h3>Ingresos</h3>
                 </div>
                 <div class="card-body">
                     <!-- Mostrar mensajes de éxito o error -->
@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <label for="dni_placa">DNI o Placa</label>
                         <input type="text" id="dni_placa" class="form-control" placeholder="Ingrese DNI o Placa" wire:model="dni_placa"
-                            onkeypress="return validarAlfanumerico(event)">
+                            onkeypress="return validarAlfanumerico(event)" style="text-transform: uppercase;">
                     </div>
 
                     <!-- Botón para validar el usuario -->

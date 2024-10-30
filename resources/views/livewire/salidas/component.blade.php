@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header text-center">
-                    <h3>Registro de Salida</h3>
+                    <h3>Salidas</h3>
                 </div>
                 <div class="card-body">
                         <!-- Mostrar mensajes de éxito o error -->

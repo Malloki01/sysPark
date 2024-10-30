@@ -267,7 +267,7 @@
                     </li>
 
                     <li class="nav-item theme-text">
-                        <a href="{{ url('/') }}" class="nav-link"> CORK </a>
+                        <a href="{{ url('/') }}" class="nav-link"> SYSPARK </a>
                     </li>
                 </ul>
 
@@ -295,7 +295,7 @@
 
                         <ul class="collapse submenu list-unstyled" id="dashboard" data-parent="#topAccordion">
                             <li>
-                                <a href="{{url('home')}}"> ESTADÍSTICOS </a>
+                                <a href="{{url('home')}}"> PANEL </a>
                             </li>
                         </ul>
                     </li>
