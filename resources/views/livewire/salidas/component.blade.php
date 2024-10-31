@@ -42,7 +42,9 @@
 
                         <!-- Botón para registrar la entrada -->
                         <div class="text-center mt-4">
-                            <button type="button" class="btn btn-primary" onclick="confirmSave()">Guardar</button>
+                            <button type="button" class="btn btn-primary" onclick="confirmSave()"
+                            {{ $estado_consulta ? '' : 'disabled' }}>Guardar
+                            </button>
                         </div>
                 </div>
             </div>

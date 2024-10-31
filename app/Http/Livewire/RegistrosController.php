@@ -15,6 +15,7 @@ class RegistrosController extends Component
     public $usuario = null; // Información del usuario validado
     public $registro; // Registro de entrada o salida del usuario
     public $tipo_operacion = 'entrada'; // Puede ser 'entrada' o 'salida'
+    public $estado_consulta = false;//estado de la consulta
 
     public function render()
     {
@@ -50,6 +51,7 @@ class RegistrosController extends Component
 
         if ($this->registro) {
             session()->flash('error', 'El usuario ya se encuentra dentro');
+            $this->estado_consulta = false; // Consulta fallida
             return;
         }
 
@@ -60,8 +62,10 @@ class RegistrosController extends Component
 
         if (!$this->usuario) {
             session()->flash('error', 'Usuario no encontrado');
+            $this->estado_consulta = false; // Consulta fallida
         } else {
             session()->flash('message', 'Usuario validado correctamente');
+            $this->estado_consulta = true; // Consulta exitosa
         }
     }
     // Consultar si el usuario está registrado para salida
@@ -72,28 +76,37 @@ class RegistrosController extends Component
             'dni_placa' => 'required',
         ]);
         // Buscar el usuario por DNI o número de placa
-        $this->usuario = Registro::where('dni', $this->dni_placa)
-            ->orWhere('placa_vehiculo', $this->dni_placa)
+        $this->usuario = Registro::where(function ($query) 
+        {
+            //agrupar las condiciones
+            $query->where('dni', $this->dni_placa)
+                ->orWhere('placa_vehiculo', $this->dni_placa);
+        })
+            ->whereNull('hora_salida')
             ->latest()
             ->first();
-    
+
         if (!$this->usuario) {
-            session()->flash('error', 'Usuario no encontrado');
+            session()->flash('error', 'Usuario no encontrado o no registrado');
+            $this->estado_consulta = false; // Consulta fallida
         } else {
             // Buscar el registro de entrada del usuario
             $this->registro = Registro::where('registros.dni', $this->usuario->dni)
                 ->orWhere('registros.placa_vehiculo', $this->usuario->placa_vehiculo)
                 ->join('clientes as cli', 'registros.dni', '=', 'cli.dni')
                 ->select('registros.*', 'cli.nombres', 'cli.apellidos', 'cli.nro_placa')
-                ->latest('hora_salida')
+                ->latest()
                 ->first();
-
+        
             if (!$this->registro) {
                 session()->flash('error', 'No se encontró un registro de entrada para este usuario');
+                 $this->estado_consulta = false; // Consulta fallida
             } else {
                 session()->flash('message', 'Usuario validado correctamente');
+                $this->estado_consulta = true; // Consulta exitosa
             }
         }
+
     }
 
     // Guardar el registro de entrada
@@ -150,6 +163,7 @@ class RegistrosController extends Component
         $this->dni_placa = '';
         $this->usuario = null;
         $this->registro = null;
+        $this->estado_consulta = false;
     }
 
     // Escuchar los eventos de Livewire
