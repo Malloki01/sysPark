@@ -38,8 +38,12 @@ class RegistrosController extends Component
             'dni_placa' => 'required',
         ]);
         // Buscar en el registro de entrada si el usuario ya está dentro
-        $this->registro = Registro::where('dni', $this->dni_placa)
-            ->orWhere('placa_vehiculo', $this->dni_placa)
+        $this->registro = Registro::where(function ($query) 
+        {
+            //agrupar las condiciones
+            $query->where('dni', $this->dni_placa)
+                ->orWhere('placa_vehiculo', $this->dni_placa);
+        })
             ->whereNull('hora_salida')
             ->latest()
             ->first();
@@ -60,7 +64,7 @@ class RegistrosController extends Component
             session()->flash('message', 'Usuario validado correctamente');
         }
     }
-     // Consultar si el usuario está registrado para salida
+    // Consultar si el usuario está registrado para salida
     public function validarUsuarioSalida()
     {
         //Validar dni_placa
@@ -69,9 +73,10 @@ class RegistrosController extends Component
         ]);
         // Buscar el usuario por DNI o número de placa
         $this->usuario = Registro::where('dni', $this->dni_placa)
-            ->orWhere('placa_vehiculo', $this->dni_placa)->latest()
+            ->orWhere('placa_vehiculo', $this->dni_placa)
+            ->latest()
             ->first();
-
+    
         if (!$this->usuario) {
             session()->flash('error', 'Usuario no encontrado');
         } else {
@@ -79,7 +84,7 @@ class RegistrosController extends Component
             $this->registro = Registro::where('registros.dni', $this->usuario->dni)
                 ->orWhere('registros.placa_vehiculo', $this->usuario->placa_vehiculo)
                 ->join('clientes as cli', 'registros.dni', '=', 'cli.dni')
-                ->select('registros.*','cli.nombres', 'cli.apellidos', 'cli.nro_placa')
+                ->select('registros.*', 'cli.nombres', 'cli.apellidos', 'cli.nro_placa')
                 ->latest('hora_salida')
                 ->first();
 
@@ -94,23 +99,28 @@ class RegistrosController extends Component
     // Guardar el registro de entrada
     public function guardarEntrada()
     {
-         // Validar si el usuario está seleccionado
-    if (!$this->usuario) {
-        $this->addError('dni_placa', 'Debe validar un usuario antes de guardar.');
-        return;
-    }
+        // Validar si el usuario está seleccionado
+        if (!$this->usuario) {
+            session()->flash('error', 'Usuario no validado');
+            return;
+        }
 
-    // Guardar la entrada si el usuario fue validado
-    Registro::create([
-        'dni' => $this->usuario->dni,
-        'placa_vehiculo' => $this->usuario->nro_placa?? null,
-        'tipo' => $this->usuario->tipo,
-        'hora_entrada' => now(),
-        'fecha' => now()->format('Y-m-d'),
-    ]);
+        // Buscar en el registro de entrada si el usuario ya está dentro
+        if ($this->registro) {
+            session()->flash('error', 'El usuario ya se encuentra dentro');
+            return;
+        }
 
-    session()->flash('message', 'Entrada registrada exitosamente');
-    $this->resetInput();
+        // Guardar la entrada si el usuario fue validado
+        Registro::create([
+            'dni' => $this->usuario->dni,
+            'placa_vehiculo' => $this->usuario->nro_placa ?? null,
+            'tipo' => $this->usuario->tipo,
+            'hora_entrada' => now(),
+            'fecha' => now()->format('Y-m-d'),
+        ]);
+        session()->flash('message', 'Entrada registrada exitosamente');
+        $this->resetInput();
     }
 
     // Guardar el registro de salida
@@ -124,7 +134,7 @@ class RegistrosController extends Component
                 ->update([
                     'hora_salida' => now(),
                 ]);
-        
+
 
             // Guardar la salida si el registro de entrada fue encontrado
 

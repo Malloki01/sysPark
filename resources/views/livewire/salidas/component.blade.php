@@ -31,14 +31,14 @@
                         </div>
 
                         <!-- Mostrar detalles del propietario si se encuentra -->
-                        @if(isset($registro) && $registro)
+                        @isset($registro)
                         <div class="mt-3">
                             <p><strong>Propietario:</strong> {{ $registro->nombres }} {{ $registro->apellidos }}</p>
                             @if($registro->nro_placa)
                             <p><strong>Nro de Placa:</strong> {{ $registro->nro_placa }}</p>
                             @endif
                         </div>
-                        @endif
+                        @endisset
 
                         <!-- Botón para registrar la entrada -->
                         <div class="text-center mt-4">
