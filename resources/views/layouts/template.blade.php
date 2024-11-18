@@ -416,6 +416,10 @@
                             <li>
                                 <a href="{{url('clientes')}}"> CLIENTES </a>
                             </li>
+
+                            <li>
+                                <a href="{{url('invitados')}}"> INVITADOS </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

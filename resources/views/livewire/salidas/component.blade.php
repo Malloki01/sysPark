@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <label for="dni_placa">DNI o Placa</label>
                             <input type="text" id="dni_placa" class="form-control" placeholder="Ingrese DNI o Placa" wire:model="dni_placa"
-                                onkeypress="return validarAlfanumerico(event)">
+                                onkeypress="return validarAlfanumerico(event)" style="text-transform: uppercase;">
                         </div>
 
                         <!-- Botón para validar el usuario -->

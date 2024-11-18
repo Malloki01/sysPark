@@ -35,4 +35,9 @@ Route::view('salidas', 'salidas');
 Route::view('graficos', 'graficos');
 Route::get('/obtener-datos', [GraficosController::class, 'obtenerDatos']);
 
+// Rutas para el controlador de clientes
+Route::view('clientes', 'clientes');
+
+// Rutas para el controlador de invitados
+Route::view('invitados', 'invitados');
 
