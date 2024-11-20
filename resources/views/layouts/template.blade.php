@@ -420,6 +420,10 @@
                             <li>
                                 <a href="{{url('invitados')}}"> INVITADOS </a>
                             </li>
+
+                            <li>
+                                <a href="{{url('#')}}"> INHABILITADOS </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
