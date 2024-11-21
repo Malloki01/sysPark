@@ -329,7 +329,14 @@
                                 <span>INCIDENCIAS</span>
                             </div>
                         </a>
+                        <ul class="collapse submenu list-unstyled" id="quotation" data-parent="#topAccordion">
+                            <li>
+                                <a href="{{ url('estados') }}"> ESTADO DE LA INCIDENCIA </a>
+                            </li>
+
+                        </ul>
                     </li>
+                    
 
                     <li class="menu single-menu">
                         <a href="#quotation" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -422,7 +429,7 @@
                             </li>
 
                             <li>
-                                <a href="{{url('#')}}"> INHABILITADOS </a>
+                                <a href="{{url('deshabilitados')}}"> DESHABILITADOS </a>
                             </li>
                         </ul>
                     </li>

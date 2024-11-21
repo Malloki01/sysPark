@@ -20,6 +20,8 @@ class CreateClientesTable extends Migration
             $table->string('apellidos'); // Apellidos del usuario
             $table->string('nro_placa')->nullable(); // Número de placa (puede ser nulo)
             $table->string('tipo'); // Tipo de vehículo
+            $table->string('correo')->nullable(); // Correo electrónico (puede ser nulo)
+            $table->string('telefono')->nullable(); // Teléfono (puede ser nulo)
             $table->timestamps();    
         });
     }

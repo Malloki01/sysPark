@@ -41,3 +41,9 @@ Route::view('clientes', 'clientes');
 // Rutas para el controlador de invitados
 Route::view('invitados', 'invitados');
 
+//Rutas para el controlador de deshabilitados
+Route::view('deshabilitados', 'deshabilitados');
+
+//Rutas para el controlador de estados
+Route::view('estados', 'estados');
+

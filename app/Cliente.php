@@ -9,5 +9,5 @@ class Cliente extends Model
 {
     // Variables : dni, nombres, apellidos, nro_placa, tipo
     protected $table = 'clientes';
-    protected $fillable = ['dni', 'nombres', 'apellidos', 'nro_placa', 'tipo'];
+    protected $fillable = ['dni', 'nombres', 'apellidos', 'nro_placa', 'tipo', 'correo', 'telefono'];    
 }
