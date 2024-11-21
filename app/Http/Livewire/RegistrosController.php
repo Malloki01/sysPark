@@ -133,6 +133,8 @@ class RegistrosController extends Component
             'fecha' => now()->format('Y-m-d'),
         ]);
         session()->flash('message', 'Entrada registrada exitosamente');
+        $this->emit('actualizarDisponibilidad');
+
         $this->resetInput();
     }
 
@@ -153,6 +155,8 @@ class RegistrosController extends Component
 
 
             session()->flash('message', 'Salida registrada exitosamente');
+            $this->emit('actualizarDisponibilidad');
+
             $this->resetInput();
         }
     }

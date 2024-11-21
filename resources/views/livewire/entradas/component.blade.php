@@ -1,6 +1,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <!-- Columna para el formulario de Ingresos -->
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-header text-center">
                     <h3>Ingresos</h3>
@@ -44,18 +45,26 @@
                     <!-- Botón para registrar la entrada -->
                     <div class="text-center mt-4">
                         <button type="button" class="btn btn-primary" onclick="confirmSave()"
-                        {{ $estado_consulta ? '' : 'disabled' }}>
-                        Guardar
+                            {{ $estado_consulta ? '' : 'disabled' }}>
+                            Guardar
                         </button>
                     </div>
-
 
                 </div>
             </div>
         </div>
-    </div>
 
+        <!-- Columna para el componente de Disponibilidad al costado -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    @livewire('disponibilidad-controller')
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 <script type="text/javascript">
     function confirmSave() {
         let me = this

@@ -283,7 +283,7 @@
                                     <polyline points="9 22 9 12 15 12 15 22"></polyline>
                                 </svg>
 
-                                <span>DISPONIBILIDAD</span>
+                                <span>DASHBOARD</span>
                             </div>
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

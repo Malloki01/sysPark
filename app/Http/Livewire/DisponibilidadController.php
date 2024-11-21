@@ -14,7 +14,7 @@ class DisponibilidadController extends Component
     ];
     
     public $disponibilidad = [];
-
+    protected $listeners = ['actualizarDisponibilidad' => 'calcularDisponibilidad'];
     public function mount()
     {
         $this->calcularDisponibilidad();
