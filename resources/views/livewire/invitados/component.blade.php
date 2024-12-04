@@ -1,7 +1,7 @@
 <div class="row layout-top-spacing">
     <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
-    @if($action == 1)
-    
+        @if($action == 1)
+
         <div class="widget-content-area br-4">
             <div class="widget-header">
                 <div class="row">
@@ -29,33 +29,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($info as $persona)
+                        @foreach($info as $r)
+                        <!-- persona -> r -->
                         <tr>
-                            <td class="text-center">{{$persona->dni}}</td>
-                            <td class="text-center">{{$persona->nombres}}</td>
-                            <td class="text-center">{{$persona->apellidos}}</td>
-                            <td class="text-center">{{$persona->correo}}</td>
-                            <td class="text-center">{{$persona->telefono}}</td>
-                            <td class="text-center">{{$persona->tipo}}</td>
+                            <td class="text-center">{{$r->dni}}</td>
+                            <td class="text-center">{{$r->nombres}}</td>
+                            <td class="text-center">{{$r->apellidos}}</td>
+                            <td class="text-center">{{$r->correo}}</td>
+                            <td class="text-center">{{$r->telefono}}</td>
+                            <td class="text-center">{{$r->tipo}}</td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-success" wire:click="autorizar({{$persona->id}})">
-                                    <i class="fas fa-check"></i> Autorizar
-                                </button>
-                                <button class="btn btn-sm btn-danger" onclick="ConfirmEliminar()">
-                                    <i class="fas fa-trash"></i> Eliminar
-                                </button>
+                                @include('common.actions', ['edit' => 'tipos_edit', 'destroy' => 'tipos_destroy'])
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-                <!-- Paginación -->
-                {{$info->links()}}
+
+                <!-- Paginación (donde agregamos el SVG para ocultar el ícono) -->
+                <div class="pagination">
+                    <!-- Aquí también puedes agregar otros botones de paginación si los tienes -->
+                    {{$info->links()}}
+                    <style>
+                        .pagination svg {
+                            display: none;
+                        }
+                    </style>
+
+                </div>
             </div>
         </div>
     </div>
     @elseif($action == 2)
-        @include('livewire.invitados.form') <!-- Formulario para agregar invitados -->
+    @include('livewire.invitados.form') <!-- Formulario para agregar invitados -->
     @endif
 </div>
 
@@ -73,7 +79,7 @@
             closeOnConfirm: false
         }, function() {
             console.log('dni', dni);
-            window.livewire.emit('deleteRow',dni); // Emitimos evento para eliminar
+            window.livewire.emit('deleteRow', dni); // Emitimos evento para eliminar
             swal.close(); // Cerramos modal
         });
     }

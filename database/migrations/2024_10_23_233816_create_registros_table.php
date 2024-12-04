@@ -25,6 +25,7 @@ class CreateRegistrosTable extends Migration
             $table->timestamps();
 
             // Foreign Key
+            
         });
     }
 

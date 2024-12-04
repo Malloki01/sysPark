@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\WithPagination;
 use Livewire\Component;
 use App\Invitado;
+use App\Cliente;
 
 class InvitadosController extends Component
 {
@@ -98,9 +99,9 @@ class InvitadosController extends Component
             
             'correo' => 'required|email',
         ]);
-    
+        // Clientes : 'dni', 'nombres', 'apellidos', 'nro_placa', 'tipo', 'correo', 'telefono'
         if ($this->selected_id <= 0) {
-            Invitado::create([
+            Cliente::create([
                 'dni' => $this->dni,
                 'nombres' => $this->nombres,
                 'apellidos' => $this->apellidos,
@@ -108,16 +109,11 @@ class InvitadosController extends Component
                 'tipo' => $this->tipo,
                 'correo' => $this->correo,
                 'nro_placa' => $this->nro_placa ?: null, // Si está vacío, asigna null
-                'estado' =>'0',
-
-                'autorizado' => $this->autorizado,
-                
-
             ]);
     
-            session()->flash('message', 'Invitado creado correctamente');
+            session()->flash('message', 'Cliente creado correctamente');
         } else {
-            $record = Invitado::find($this->selected_id);
+            $record = Cliente::find($this->selected_id);
             $record->update([
                 'dni' => $this->dni,
                 'nombres' => $this->nombres,
@@ -131,7 +127,7 @@ class InvitadosController extends Component
                 'estado' => '0', 
             ]);
     
-            session()->flash('message', 'Invitado actualizado correctamente');
+            session()->flash('message', 'Cliente actualizado correctamente');
         }
     
         $this->resetInput();

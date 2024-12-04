@@ -21,6 +21,7 @@
             </a>
         </div>
     </nav>
+
     <!-- Livewire Styles -->
     @livewireStyles
 
@@ -37,64 +38,64 @@
                     </div>
                     <div class="card-body">
                         <!-- Formulario -->
-                            <div class="row g-3 mb-3">
-                                <div class="col-12 col-md-6">
-                                    <label for="dni" class="form-label">DNI</label>
-                                    <input type="text" id="dni" class="form-control" wire:model.defer="dni" placeholder="Ingrese el DNI" required>
-                                    @error('dni') <span class="text-danger">{{ $message }}</span> @enderror
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <label for="nombres" class="form-label">Nombres</label>
-                                    <input type="text" id="nombres" class="form-control" wire:model.defer="nombres" placeholder="Ingrese los nombres" required>
-                                    @error('nombres') <span class="text-danger">{{ $message }}</span> @enderror
-                                </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-12 col-md-6">
+                                <label for="dni" class="form-label">DNI</label>
+                                <input type="text" id="dni" class="form-control" wire:model.defer="dni" placeholder="Ingrese el DNI" required>
+                                @error('dni') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+                            <div class="col-12 col-md-6">
+                                <label for="nombres" class="form-label">Nombres</label>
+                                <input type="text" id="nombres" class="form-control" wire:model.defer="nombres" placeholder="Ingrese los nombres" required>
+                                @error('nombres') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
 
-                            <div class="row g-3 mb-3">
-                                <div class="col-12 col-md-6">
-                                    <label for="apellidos" class="form-label">Apellidos</label>
-                                    <input type="text" id="apellidos" class="form-control" wire:model.defer="apellidos" placeholder="Ingrese los apellidos" required>
-                                    @error('apellidos') <span class="text-danger">{{ $message }}</span> @enderror
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <label for="correo" class="form-label">Correo Institucional</label>
-                                    <input type="email" id="correo" class="form-control" wire:model.defer="correo" placeholder="Ingrese el correo" required>
-                                    @error('correo') <span class="text-danger">{{ $message }}</span> @enderror
-                                </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-12 col-md-6">
+                                <label for="apellidos" class="form-label">Apellidos</label>
+                                <input type="text" id="apellidos" class="form-control" wire:model.defer="apellidos" placeholder="Ingrese los apellidos" required>
+                                @error('apellidos') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+                            <div class="col-12 col-md-6">
+                                <label for="correo" class="form-label">Correo Institucional</label>
+                                <input type="email" id="correo" class="form-control" wire:model.defer="correo" placeholder="Ingrese el correo" required>
+                                @error('correo') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
 
-                            <div class="row g-3 mb-3">
-                                <div class="col-12 col-md-6">
-                                    <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="text" id="telefono" class="form-control" wire:model.defer="telefono" placeholder="Ingrese el teléfono" required>
-                                    @error('telefono') <span class="text-danger">{{ $message }}</span> @enderror
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <label for="tipo" class="form-label">Tipo de Vehículo</label>
-                                    <select id="tipo" class="form-select" wire:model.defer="tipo" required>
-                                        <option value="bicicleta">Bicicleta</option>
-                                        <option value="carro">Carro</option>
-                                        <option value="moto">Moto</option>
-                                        <option value="scooter">Scooter</option>
-                                    </select>
-                                    @error('tipo') <span class="text-danger">{{ $message }}</span> @enderror
-                                </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-12 col-md-6">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="text" id="telefono" class="form-control" wire:model.defer="telefono" placeholder="Ingrese el teléfono" required>
+                                @error('telefono') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+                            <div class="col-12 col-md-6">
+                                <label for="tipo" class="form-label">Tipo de Vehículo</label>
+                                <select id="tipo" class="form-select" wire:model.defer="tipo" required>
+                                    <option value="bicicleta">Bicicleta</option>
+                                    <option value="carro">Carro</option>
+                                    <option value="moto">Moto</option>
+                                    <option value="scooter">Scooter</option>
+                                </select>
+                                @error('tipo') <span class="text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
 
-                            <div class="row g-3 mb-3">
-                                <div class="col-12">
-                                    <label for="nro_placa" class="form-label">Número de Placa</label>
-                                    <input type="text" id="nro_placa" class="form-control" wire:model.defer="nro_placa" placeholder="Ingrese la placa (opcional)">
-                                    @error('nro_placa') <span class="text-danger">{{ $message }}</span> @enderror
-                                </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-12">
+                                <label for="nro_placa" class="form-label">Número de Placa</label>
+                                <input type="text" id="nro_placa" class="form-control" wire:model.defer="nro_placa" placeholder="Ingrese la placa (opcional)">
+                                @error('nro_placa') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+                        </div>
 
-                            <div class="d-flex justify-content-between">
-                                <button type="button" wire:click="cancel" class="btn btn-outline-secondary">
-                                    &larr; Volver
-                                </button>
-                                <button onclick="confirmSave()" class="btn btn-dark">Guardar</button>
-                            </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" wire:click="cancel" class="btn btn-outline-secondary">
+                                &larr; Volver
+                            </button>
+                            <button onclick="confirmSave()" class="btn btn-dark">Guardar</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -102,36 +103,34 @@
     </div>
 
     <script type="text/javascript">
-     function confirmSave() {
-        Swal.fire({
-            title: 'CONFIRMAR',
-            text: '¿DESEAS REGISTRARTE?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Aceptar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            // Verificar si el usuario hizo clic en "Aceptar"
-            if (result.isConfirmed) {
-                // Aquí es donde se ejecuta el proceso después de aceptar
-                window.livewire.emit('store'); // Emitir el evento de Livewire
-
-                // Mostrar la notificación de éxito después de que el proceso haya terminado
-                window.livewire.on('storeSuccess', () => {
-                    toastr.success('REGISTRO COMPLETADO');
-                });
-            }
-        });
-    }
-
+        function confirmSave() {
+            // Mostrar mensaje de confirmación con SweetAlert2
+            Swal.fire({
+                title: 'CONFIRMAR',
+                text: '¿DESEA GUARDAR EL REGISTRO?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Emitimos el evento de Livewire
+                    Livewire.emit('store');
+                    // Mostramos el mensaje de éxito con Toastr
+                    toastr.success('Registro guardado con éxito');
+                }
+            });
+        }
     </script>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Agrega SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- Toastr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
 </body>
 
 </html>

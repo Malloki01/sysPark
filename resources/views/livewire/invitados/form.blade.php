@@ -42,7 +42,7 @@
 
             <!-- Correo Institucional -->
             <div class="form-group col-lg-4 col-md-4 col-sm-12">
-                <label>Correo Institucional</label>
+                <label>Correo</label>
                 <input type="email" wire:model.lazy="correo" class="form-control" placeholder="Ingrese el correo">
                 @error('email') <span class="text-danger">{{ $message }}</span> @enderror
             </div>

@@ -1,13 +1,19 @@
-<div class="row layout-top-spacing">
+<div class="row layout-top-spacing justify-content-center">
+    <style>
+        .row {
+            justify-content: center;
+        }
+    </style>
+
     <div class="col-xl-12 col-lg-12 col-md-12 col-12 layout-spacing">
         <div class="widget-content-area br-4">
             <div class="widget-one">
-                <h5>
+                <h5 class="text-center">
                     <b>
                         @if ($selected_id == 0)
-                            Crear Incidencia
+                        Crear Incidencia
                         @else
-                            Editar Incidencia
+                        Editar Incidencia
                         @endif
                     </b>
                 </h5>
@@ -49,28 +55,30 @@
                         @error('descripcion') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
                 </div>
-
-                 <!-- Campo para subir imagen -->
-                 <!-- <div class="col-sm-12 col-lg-8 col-md-8 mb-4">
+                <div class="row">
+                    <!-- Campo para subir imagen -->
+                    <div class="col-sm-12 col-lg-8 col-md-8 mb-4 ">
                         <label>Subir Imagen</label>
-                        <div class="input-group">
-                            <input type="file" class="form-control" wire:model="image" accept="image/*">
+                        <div class="input-group">                  
+                                                     <!-- wire:model="image" -->
+                            <input type="file" class="form-control" accept="image/*">
                         </div>
                         @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
-                </div> -->
+                </div>
+            </div>
 
-                <div class="column">
-                    <div class="col-lg-5 mt-2 d-flex justify-content-start">
-                        <button type="button" wire:click="doAction(1)" class="btn btn-outline-danger btn-rounded mr-1">
-                            <i class="mbri-left"></i> Regresar
-                        </button>
-                        <button type="button" wire:click="StoreOrUpdate" class="btn btn-outline-success btn-rounded">
-                            <i class="mbri-success"></i> Guardar
-                        </button>
-                    </div>
+            <div class="row">
+                <div class="col-lg-5 justify-content-center mt-3  d-flex">
+                    <button type="button" wire:click="doAction(1)" class="btn btn-outline-danger btn-rounded mr-1">
+                        <i class="mbri-left"></i> Regresar
+                    </button>
+                    <button type="button" wire:click="StoreOrUpdate" class="btn btn-outline-success btn-rounded">
+                        <i class="mbri-success"></i> Guardar
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
