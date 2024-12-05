@@ -29,14 +29,16 @@
                 <select wire:model="tipo" class="form-control text-center">
                     <option value="Elegir">Elegir</option>
                     <option value="Admin">Admin</option>
-                    <option value="Empleado">Empleado</option>
+                    <option value="Supervisor">Supervisor</option>
+                    <option value="Vigilante">Vigilante</option>
                 </select>
             </div>
-
+            @if($selected_id == 0)
             <div class="form-group col-lg-4 col-md-4 col-sm-12">
                 <label>Password</label>
                 <input type="password" wire:model.lazy="password" class="form-control" placeholder="contraseña">
             </div>
+            @endif
             <!-- <div class="form-group col-lg-4 col-md-4 col-sm-12">
                 <label>Dirección</label>
                 <input type="text" wire:model.lazy="direccion" class="form-control" placeholder="dirección...">

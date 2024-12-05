@@ -75,7 +75,8 @@ class UsuarioController extends Component
     {
         $this->validate([
             'nombre' => 'required',
-            'password' => 'required',
+            //Si no es un update, entonces se valida el password
+            'password' => $this->selected_id <= 0 ? 'required' : '',
             'email' => 'required|email',
             'tipo' => 'not_in:Elegir',
             'tipo' => 'required'
@@ -102,7 +103,7 @@ class UsuarioController extends Component
                 'tipo' => $this->tipo,
                 'email' => $this->email,
                 'direccion' => $this->direccion,
-                'password' => bcrypt($this->password)
+                // 'password' => bcrypt($this->password)
             ]);
         }
         
