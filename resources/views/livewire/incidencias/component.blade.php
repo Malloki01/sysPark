@@ -68,7 +68,7 @@
                 function() {
                     console.log('ID', id);
                     window.livewire.emit('deleteRow', id) //emitimos evento deleteRow
-                    toastr.success('info', 'Registro eliminado con éxito') //mostramos mensaje de confirmación
+                    toastr.success('info', 'Incidencia eliminada con éxito') //mostramos mensaje de confirmación
                     swal.close() //cerramos la modal
                 })
         }

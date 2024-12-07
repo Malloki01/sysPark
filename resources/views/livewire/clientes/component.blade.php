@@ -41,7 +41,7 @@
                         <div class="row g-3 mb-3">
                             <div class="col-12 col-md-6">
                                 <label for="dni" class="form-label">DNI</label>
-                                <input type="text" id="dni" class="form-control" wire:model.defer="dni" placeholder="Ingrese el DNI" required>
+                                <input type="text" id="dni" maxlength="8" pattern="\d{1,8}" class="form-control" wire:model.defer="dni" placeholder="Ingrese el DNI" required>
                                 @error('dni') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-12 col-md-6">
@@ -66,8 +66,8 @@
 
                         <div class="row g-3 mb-3">
                             <div class="col-12 col-md-6">
-                                <label for="telefono" class="form-label">Teléfono</label>
-                                <input type="text" id="telefono" class="form-control" wire:model.defer="telefono" placeholder="Ingrese el teléfono" required>
+                                <label for="telefono"  class="form-label">Teléfono</label>
+                                <input type="text" id="telefono" maxlength="9" pattern="\d{1,9}" class="form-control" wire:model.defer="telefono" placeholder="Ingrese el teléfono" required>
                                 @error('telefono') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="col-12 col-md-6">

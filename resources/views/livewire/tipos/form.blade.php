@@ -13,7 +13,7 @@
                     </b>
                 </h5>
                 <div class="row">
-                    <div class="col-sm-12 col-lg-8 col-md-8 ">
+                    <div class="col-sm-14 col-lg-25 col-md-25 ">
                         <label>Descripción</label>
                         <div class="input-group ">
                             <div class="input-group-prepend">

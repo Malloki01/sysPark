@@ -420,9 +420,9 @@
                                 <a href="{{url('usuarios')}}">OPERADORES</a>
                             </li>
 
-                            <li>
+                            <!-- <li>
                                 <a href="{{url('clientes')}}"> CLIENTES </a>
-                            </li>
+                            </li> -->
 
                             <li>
                                 <a href="{{url('invitados')}}"> INVITADOS </a>
