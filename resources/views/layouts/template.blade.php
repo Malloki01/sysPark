@@ -420,9 +420,9 @@
                                 <a href="{{url('usuarios')}}">OPERADORES</a>
                             </li>
 
-                            <!-- <li>
-                                <a href="{{url('clientes')}}"> CLIENTES </a>
-                            </li> -->
+                            <li>
+                                <a href="{{url('visualizacion')}}">VISUALIZAR REGISTROS</a>
+                            </li> 
 
                             <li>
                                 <a href="{{url('invitados')}}"> INVITADOS </a>
@@ -431,6 +431,7 @@
                             <li>
                                 <a href="{{url('deshabilitados')}}"> DESHABILITADOS </a>
                             </li>
+
                         </ul>
                     </li>
                 </ul>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\GraficosController;
+use App\Http\Controllers\VisualizarRegistrosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +47,8 @@ Route::view('deshabilitados', 'deshabilitados');
 
 //Rutas para el controlador de estados
 Route::view('estados', 'estados');
+
+//Ruta para el controlador de visualizar registros
+Route::view('visualizacion', 'visualizacion');
+Route::get('/registros', [VisualizarRegistrosController::class, 'show']);
 
